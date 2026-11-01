@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar cita | Salud Comunitaria</title>
+
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+    <main class="appointment-page">
+        <div class="appointment-content">
+
+            <header class="appointment-header">
+                <a th:href="@{/paciente}" class="appointment-back">
+                    ← Volver al menú
+                </a>
+
+                <h1>Confirmar cita médica</h1>
+                <p>Verifica los datos antes de registrar tu cita.</p>
+            </header>
+
+            <nav class="appointment-steps" aria-label="Pasos para agendar una cita">
+                <div class="appointment-step completed">
+                    <span>1</span>
+                    <p>Especialidad</p>
+                </div>
+
+                <div class="appointment-step completed">
+                    <span>2</span>
+                    <p>Profesional</p>
+                </div>
+
+                <div class="appointment-step completed">
+                    <span>3</span>
+                    <p>Fecha y hora</p>
+                </div>
+
+                <div class="appointment-step active">
+                    <span>4</span>
+                    <p>Confirmación</p>
+                </div>
+            </nav>
+
+            <section class="confirmation-card">
+
+                <div class="confirmation-icon">
+                    ✓
+                </div>
+
+                <h2>Resumen de tu cita</h2>
+
+                <p class="confirmation-notice">
+                    Revisa que la información sea correcta y confirma
+                    para registrar la cita.
+                </p>
+
+                <div class="confirmation-details">
+
+                    <div class="confirmation-row">
+                        <span>Especialidad</span>
+                        <strong th:text="${especialidad}">Medicina general</strong>
+                    </div>
+
+                    <div class="confirmation-row">
+                        <span>Profesional de salud</span>
+                        <strong th:text="${profesional}">Profesional seleccionado</strong>
+                    </div>
+
+                    <div class="confirmation-row">
+                        <span>Fecha de la cita</span>
+                        <strong th:text="${fecha}">2026-10-10</strong>
+                    </div>
+
+                    <div class="confirmation-row">
+                        <span>Hora de la cita</span>
+                        <strong th:text="${hora}">08:00</strong>
+                    </div>
+
+                </div>
+
+                <form th:action="@{/citas/guardar}" method="post">
+
+                    <input type="hidden"
+                           name="especialidad"
+                           th:value="${especialidad}">
+
+                    <input type="hidden"
+                           name="profesional"
+                           th:value="${profesional}">
+
+                    <input type="hidden"
+                           name="fecha"
+                           th:value="${fecha}">
+
+                    <input type="hidden"
+                           name="hora"
+                           th:value="${hora}">
+
+                    <div class="confirmation-actions">
+
+                        <button type="submit" class="appointment-button">
+                            Confirmar cita
+                        </button>
+
+                        <a th:href="@{/paciente}"
+                           class="appointment-secondary-button">
+                            Cancelar
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>

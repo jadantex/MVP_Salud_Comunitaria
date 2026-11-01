@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de la cita | Salud Comunitaria</title>
+
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+    <main class="appointment-page">
+        <div class="appointment-content">
+
+            <section class="confirmation-card">
+
+                <div class="confirmation-icon">
+                    ✓
+                </div>
+
+                <h1>Cita registrada correctamente</h1>
+
+                <p class="confirmation-notice"
+                   th:text="${mensaje}">
+                    La cita se registró correctamente.
+                </p>
+
+                <div class="confirmation-details">
+                    <div class="confirmation-row">
+                        <span>Número de cita</span>
+                        <strong th:text="${citaId}">1</strong>
+                    </div>
+                </div>
+
+                <p>
+                    Puedes regresar al menú principal o solicitar otra cita.
+                </p>
+
+                <div class="confirmation-actions">
+
+                    <a th:href="@{/paciente}"
+                       class="appointment-button">
+                        Volver al menú
+                    </a>
+
+                    <a th:href="@{/citas/nueva}"
+                       class="appointment-secondary-button">
+                        Agendar otra cita
+                    </a>
+
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>

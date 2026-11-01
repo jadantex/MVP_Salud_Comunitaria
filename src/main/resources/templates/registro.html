@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear cuenta | Salud Comunitaria</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body class="login-page">
+
+    <main class="login-container">
+        <section class="login-card">
+
+            <h1>Salud Comunitaria</h1>
+            <h2>Crear una cuenta</h2>
+
+            <p>
+                Regístrate para gestionar tus citas médicas
+                y consultar tus servicios de salud.
+            </p>
+
+            <div th:if="${error}" class="mensaje-error"
+                 th:text="${error}" role="alert">
+            </div>
+
+            <form th:action="@{/registro}" method="post">
+
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text"
+                           id="nombre"
+                           name="nombre"
+                           required
+                           maxlength="100"
+                           autocomplete="name"
+                           placeholder="Escribe tu nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email"
+                           id="correo"
+                           name="correo"
+                           required
+                           maxlength="150"
+                           autocomplete="email"
+                           placeholder="nombre@correo.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password"
+                           id="contrasena"
+                           name="contrasena"
+                           required
+                           minlength="8"
+                           autocomplete="new-password"
+                           placeholder="Mínimo 8 caracteres">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmarContrasena">
+                        Confirmar contraseña
+                    </label>
+                    <input type="password"
+                           id="confirmarContrasena"
+                           name="confirmarContrasena"
+                           required
+                           minlength="8"
+                           autocomplete="new-password"
+                           placeholder="Repite la contraseña">
+                </div>
+
+                <button type="submit" class="login-button">
+                    Crear cuenta
+                </button>
+
+            </form>
+
+            <p class="login-footer">
+                ¿Ya tienes una cuenta?
+                <a th:href="@{/login}">Inicia sesión</a>
+            </p>
+
+        </section>
+    </main>
+
+</body>
+</html>

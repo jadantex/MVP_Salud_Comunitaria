@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cambiar contraseña | Salud Comunitaria</title>
+
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <section class="login-card">
+
+            <!-- Encabezado -->
+            <div class="brand">
+                <div class="brand-icon" aria-hidden="true">+</div>
+
+                <div>
+                    <div class="brand-name">Salud Comunitaria</div>
+                    <div class="brand-subtitle">
+                        Seguridad de tu cuenta
+                    </div>
+                </div>
+            </div>
+
+            <h2>Cambiar contraseña</h2>
+
+            <p class="login-description">
+                Actualiza tu contraseña para mantener segura
+                tu cuenta de Salud Comunitaria.
+            </p>
+
+            <!-- Mensaje de éxito -->
+            <p th:if="${mensaje}"
+               class="mensaje-exito"
+               role="status"
+               th:text="${mensaje}">
+            </p>
+
+            <!-- Mensaje de error -->
+            <p th:if="${error}"
+               class="mensaje-error"
+               role="alert"
+               th:text="${error}">
+            </p>
+
+            <!-- Formulario -->
+            <form th:action="@{/cambiar-contrasena}" method="post">
+
+                <!-- Protección CSRF -->
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}">
+
+                <div class="form-group">
+                    <label for="contrasenaActual">
+                        Contraseña actual
+                    </label>
+
+                    <input
+                        type="password"
+                        id="contrasenaActual"
+                        name="contrasenaActual"
+                        autocomplete="current-password"
+                        placeholder="Ingresa tu contraseña actual"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nuevaContrasena">
+                        Nueva contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="nuevaContrasena"
+                        name="nuevaContrasena"
+                        minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Mínimo 8 caracteres"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmarContrasena">
+                        Confirmar nueva contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmarContrasena"
+                        name="confirmarContrasena"
+                        minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Repite la nueva contraseña"
+                        required>
+                </div>
+
+                <button type="submit" class="login-button">
+                    Cambiar contraseña
+                </button>
+
+            </form>
+
+            <!-- Regresar al panel -->
+            <p class="login-footer">
+                <a th:href="@{/paciente}">
+                    Volver al panel del paciente
+                </a>
+            </p>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

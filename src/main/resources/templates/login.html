@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Salud Comunitaria | Iniciar sesión</title>
+
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <!-- Panel izquierdo -->
+        <section class="welcome-panel">
+
+            <div class="brand">
+                <div class="brand-icon" aria-hidden="true">+</div>
+
+                <div>
+                    <div class="brand-name">Salud Comunitaria</div>
+                    <div class="brand-subtitle">
+                        Acceso a la salud para todos
+                    </div>
+                </div>
+            </div>
+
+            <h1>
+                Tu salud,<br>
+                cerca de <span>ti.</span>
+            </h1>
+
+            <p class="welcome-description">
+                Accede a los servicios de salud de manera sencilla.
+                Agenda tus citas médicas, consulta tu información
+                y encuentra orientación para cuidar tu bienestar.
+            </p>
+
+            <div class="welcome-note">
+                <span aria-hidden="true">✓</span>
+                Un espacio pensado para tu bienestar
+            </div>
+
+        </section>
+
+        <!-- Tarjeta de inicio de sesión -->
+        <section class="login-card">
+
+            <h2>Bienvenido</h2>
+
+            <p class="login-description">
+                Ingresa para acceder a los servicios de salud.
+            </p>
+
+            <!-- Mensaje cuando las credenciales son incorrectas -->
+            <p th:if="${param.error}"
+               class="mensaje-error"
+               role="alert">
+                Correo electrónico o contraseña incorrectos.
+            </p>
+
+            <!-- Mensaje después de cerrar sesión -->
+            <p th:if="${param.logout}"
+               class="mensaje-exito"
+               role="status">
+                Has cerrado sesión correctamente.
+            </p>
+
+            <!-- Mensaje después de registrarse -->
+            <p th:if="${param.registro == 'ok'}"
+               class="mensaje-exito"
+               role="status">
+                Tu cuenta se ha creado correctamente.
+                Ahora puedes iniciar sesión.
+            </p>
+
+            <!-- Formulario gestionado por Spring Security -->
+            <form th:action="@{/login}" method="post">
+
+                <!-- Protección contra solicitudes CSRF -->
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}">
+
+                <div class="form-group">
+                    <label for="correo">Correo electrónico</label>
+
+                    <div class="input-wrapper">
+                        <span class="field-icon" aria-hidden="true">✉</span>
+
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            placeholder="Ingresa tu correo"
+                            autocomplete="email"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contrasena">Contraseña</label>
+
+                    <div class="input-wrapper">
+                        <span class="field-icon" aria-hidden="true">▣</span>
+
+                        <input
+                            type="password"
+                            id="contrasena"
+                            name="contrasena"
+                            placeholder="Ingresa tu contraseña"
+                            autocomplete="current-password"
+                            required>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-button">
+                    Iniciar sesión
+                </button>
+
+            </form>
+
+            <!-- Enlace para crear una cuenta -->
+            <p class="login-footer">
+                ¿No tienes una cuenta?
+                <a th:href="@{/registro}">Regístrate aquí</a>
+            </p>
+
+            <p class="login-footer">
+                Salud Comunitaria · Cuidamos de ti
+            </p>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

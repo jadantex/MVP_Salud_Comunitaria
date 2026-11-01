@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Historia clínica | Salud Comunitaria</title>
+
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+    <main class="appointment-page">
+        <div class="appointment-content">
+
+            <header class="appointment-header">
+                <a th:href="@{/paciente}" class="appointment-back">
+                    ← Volver al menú
+                </a>
+
+                <h1>Historia clínica</h1>
+
+                <p>
+                    Consulta el historial de tus citas y las atenciones médicas
+                    asociadas.
+                </p>
+            </header>
+
+            <section class="confirmation-card">
+
+                <div th:if="${citas.isEmpty()}"
+                     class="confirmation-notice">
+
+                    <h2>No hay citas registradas</h2>
+
+                    <p>
+                        Cuando agendes citas médicas, podrás consultar
+                        su información en esta sección.
+                    </p>
+
+                    <div class="confirmation-actions">
+                        <a th:href="@{/citas/nueva}"
+                           class="appointment-button">
+                            Agendar una cita
+                        </a>
+                    </div>
+
+                </div>
+
+                <div th:unless="${citas.isEmpty()}">
+
+                    <h2>Historial de citas médicas</h2>
+
+                    <div class="appointments-table-container">
+                        <table class="appointments-table">
+
+                            <thead>
+                                <tr>
+                                    <th>N.º de cita</th>
+                                    <th>Especialidad</th>
+                                    <th>Profesional</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr th:each="cita : ${citas}">
+                                    <td th:text="${cita.id}">1</td>
+
+                                    <td th:text="${cita.especialidad}">
+                                        Medicina general
+                                    </td>
+
+                                    <td th:text="${cita.profesional}">
+                                        Profesional de salud
+                                    </td>
+
+                                    <td th:text="${cita.fecha}">
+                                        2026-10-27
+                                    </td>
+
+                                    <td th:text="${cita.hora}">
+                                        09:00
+                                    </td>
+
+                                    <td>
+                                        <span class="appointment-status"
+                                              th:text="${cita.estado}"
+                                              th:classappend="${cita.estado == 'PENDIENTE'}
+                                              ? ' status-pending' : ''">
+                                            PENDIENTE
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="confirmation-actions">
+                    <a th:href="@{/paciente}"
+                       class="appointment-secondary-button">
+                        Volver al menú principal
+                    </a>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>

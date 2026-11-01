@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar profesional | Salud Comunitaria</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+<main class="appointment-page">
+    <div class="appointment-content">
+
+        <header class="appointment-header">
+            <div>
+                <a th:href="@{/citas/nueva}">← Volver a especialidades</a>
+                <h1>Elige a tu profesional</h1>
+                <p>
+                    Especialidad seleccionada:
+                    <strong th:text="${especialidad}">Medicina general</strong>
+                </p>
+            </div>
+            <strong>Salud Comunitaria</strong>
+        </header>
+
+        <nav class="appointment-steps" aria-label="Pasos para agendar una cita">
+            <div class="appointment-step active">1. Especialidad</div>
+            <div class="appointment-step active">2. Profesional</div>
+            <div class="appointment-step">3. Fecha y hora</div>
+            <div class="appointment-step">4. Confirmar</div>
+        </nav>
+
+        <section class="appointment-section-title">
+            <h2>Profesionales disponibles</h2>
+            <p>Selecciona el profesional con quien deseas agendar tu cita.</p>
+        </section>
+
+        <form th:action="@{/citas/fecha-hora}" method="get" id="professionalForm">
+
+            <input type="hidden" name="especialidad" th:value="${especialidad}">
+
+            <div class="professional-grid">
+
+                <label class="professional-card">
+                    <input type="radio" name="profesional"
+                           value="Dra. Ana María López" required>
+
+                    <div class="professional-avatar">AL</div>
+                    <h3>Dra. Ana María López</h3>
+                    <p class="professional-specialty"
+                       th:text="${especialidad}">Medicina general</p>
+                    <p class="professional-description">
+                        Atención integral y orientación médica.
+                    </p>
+                    <span class="professional-status">Disponible para selección</span>
+                </label>
+
+                <label class="professional-card">
+                    <input type="radio" name="profesional"
+                           value="Dr. Carlos José Pérez">
+
+                    <div class="professional-avatar">CP</div>
+                    <h3>Dr. Carlos José Pérez</h3>
+                    <p class="professional-specialty"
+                       th:text="${especialidad}">Medicina general</p>
+                    <p class="professional-description">
+                        Valoración, seguimiento y cuidado del paciente.
+                    </p>
+                    <span class="professional-status">Disponible para selección</span>
+                </label>
+
+                <label class="professional-card">
+                    <input type="radio" name="profesional"
+                           value="Dra. Luz Marina Pushaina">
+
+                    <div class="professional-avatar">LP</div>
+                    <h3>Dra. Luz Marina Pushaina</h3>
+                    <p class="professional-specialty"
+                       th:text="${especialidad}">Medicina general</p>
+                    <p class="professional-description">
+                        Atención cercana con enfoque comunitario.
+                    </p>
+                    <span class="professional-status">Disponible para selección</span>
+                </label>
+
+            </div>
+
+            <p id="professionalMessage" class="appointment-message"
+               role="alert" hidden>
+                Selecciona un profesional para continuar.
+            </p>
+
+            <div class="appointment-actions">
+                <button type="submit" class="appointment-button">
+                    Elegir fecha y hora →
+                </button>
+            </div>
+
+        </form>
+    </div>
+</main>
+
+<script>
+    document.getElementById('professionalForm').addEventListener('submit', function(event) {
+        const selected = document.querySelector('input[name="profesional"]:checked');
+        const message = document.getElementById('professionalMessage');
+
+        if (!selected) {
+            event.preventDefault();
+            message.hidden = false;
+        } else {
+            message.hidden = true;
+        }
+    });
+</script>
+
+</body>
+</html>

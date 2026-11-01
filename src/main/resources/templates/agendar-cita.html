@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar cita | Salud Comunitaria</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+
+    <main class="appointment-page">
+
+        <!-- Mensaje de error -->
+        <div th:if="${error}" class="mensaje-error" role="alert">
+            <span th:text="${error}"></span>
+        </div>
+
+        <!-- Mensaje de éxito, si existe -->
+        <div th:if="${mensaje}" class="mensaje-exito" role="status">
+            <span th:text="${mensaje}"></span>
+        </div>
+
+        <div class="appointment-content">
+
+            <header class="appointment-header">
+                <div>
+                    <a th:href="@{/paciente}">← Volver al menú</a>
+                    <h1>Agendar cita médica</h1>
+                    <p>Selecciona el servicio de salud que necesitas.</p>
+                </div>
+                <strong>Salud Comunitaria</strong>
+            </header>
+
+            <nav class="appointment-steps" aria-label="Pasos para agendar una cita">
+                <div class="appointment-step active">1. Especialidad</div>
+                <div class="appointment-step">2. Profesional</div>
+                <div class="appointment-step">3. Fecha y hora</div>
+                <div class="appointment-step">4. Confirmar</div>
+            </nav>
+
+            <form th:action="@{/citas/profesional}" method="get" id="specialtyForm">
+
+                <section class="appointment-section-title">
+                    <h2>¿Qué atención necesitas?</h2>
+                    <p>Selecciona una especialidad para continuar con tu cita.</p>
+                </section>
+
+                <div class="specialty-grid">
+                    <label class="specialty-option">
+                        <span class="specialty-icon">✚</span>
+                        <span class="specialty-info">
+                            <strong>Medicina general</strong>
+                            <small>Valoración general y orientación médica.</small>
+                        </span>
+                        <input type="radio" name="especialidad" value="Medicina general" required>
+                    </label>
+
+                    <label class="specialty-option">
+                        <span class="specialty-icon">♡</span>
+                        <span class="specialty-info">
+                            <strong>Pediatría</strong>
+                            <small>Atención para niños y adolescentes.</small>
+                        </span>
+                        <input type="radio" name="especialidad" value="Pediatría">
+                    </label>
+
+                    <label class="specialty-option">
+                        <span class="specialty-icon">✿</span>
+                        <span class="specialty-info">
+                            <strong>Ginecología</strong>
+                            <small>Salud integral y cuidado de la mujer.</small>
+                        </span>
+                        <input type="radio" name="especialidad" value="Ginecología">
+                    </label>
+
+                    <label class="specialty-option">
+                        <span class="specialty-icon">☼</span>
+                        <span class="specialty-info">
+                            <strong>Psicología</strong>
+                            <small>Acompañamiento emocional y bienestar.</small>
+                        </span>
+                        <input type="radio" name="especialidad" value="Psicología">
+                    </label>
+
+                    <label class="specialty-option">
+                        <span class="specialty-icon">＋</span>
+                        <span class="specialty-info">
+                            <strong>Nutrición</strong>
+                            <small>Orientación alimentaria y nutricional.</small>
+                        </span>
+                        <input type="radio" name="especialidad" value="Nutrición">
+                    </label>
+
+                    <label class="specialty-option">
+                        <span class="specialty-icon">✧</span>
+                        <span class="specialty-info">
+                            <strong>Odontología</strong>
+                            <small>Prevención y cuidado de la salud oral.</small>
+                        </span>
+                        <input type="radio" name="especialidad" value="Odontología">
+                    </label>
+                </div>
+
+                <p id="specialtyMessage" class="appointment-message" role="alert" hidden>
+                    Selecciona una especialidad para continuar.
+                </p>
+
+                <div class="appointment-actions">
+                    <button class="appointment-button" type="submit">
+                        Continuar →
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('specialtyForm').addEventListener('submit', function (event) {
+            const selected = document.querySelector('input[name="especialidad"]:checked');
+            const message = document.getElementById('specialtyMessage');
+
+            if (!selected) {
+                event.preventDefault();
+                message.hidden = false;
+            } else {
+                message.hidden = true;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

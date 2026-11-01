@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información preventiva | Salud Comunitaria</title>
+
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+    <main class="preventive-container">
+
+        <header class="preventive-header">
+            <h1>Información preventiva</h1>
+            <p>
+                Encuentra recomendaciones para cuidar tu salud,
+                prevenir enfermedades y mejorar tu bienestar.
+            </p>
+        </header>
+
+        <section class="preventive-intro">
+            <h2>¡Cuidar tu salud es importante!</h2>
+            <p>
+                Adoptar hábitos saludables y realizar controles médicos
+                periódicos puede ayudar a prevenir enfermedades y detectar
+                oportunamente posibles problemas de salud.
+            </p>
+        </section>
+
+        <section class="preventive-grid">
+
+            <article class="preventive-card">
+                <div class="preventive-icon" aria-hidden="true">🥗</div>
+                <h2>Alimentación saludable</h2>
+                <p>
+                    Consume alimentos variados, incluye frutas y verduras,
+                    prefiere alimentos frescos y limita el exceso de sal,
+                    azúcar y productos ultraprocesados.
+                </p>
+            </article>
+
+            <article class="preventive-card">
+                <div class="preventive-icon" aria-hidden="true">💧</div>
+                <h2>Hidratación</h2>
+                <p>
+                    Toma agua potable durante el día. La cantidad necesaria
+                    puede variar según tu edad, actividad física, clima y
+                    estado de salud.
+                </p>
+            </article>
+
+            <article class="preventive-card">
+                <div class="preventive-icon" aria-hidden="true">🏃</div>
+                <h2>Actividad física</h2>
+                <p>
+                    Realiza actividades físicas acordes con tus capacidades,
+                    como caminar, bailar o practicar algún deporte.
+                    Aumenta la actividad gradualmente.
+                </p>
+            </article>
+
+            <article class="preventive-card">
+                <div class="preventive-icon" aria-hidden="true">🩺</div>
+                <h2>Controles médicos</h2>
+                <p>
+                    Asiste a los controles de salud recomendados para tu edad
+                    y tus necesidades. Consulta al personal de salud si
+                    aparecen síntomas persistentes o preocupantes.
+                </p>
+            </article>
+
+            <article class="preventive-card">
+                <div class="preventive-icon" aria-hidden="true">🧼</div>
+                <h2>Higiene y prevención</h2>
+                <p>
+                    Lávate las manos con agua y jabón cuando sea posible,
+                    mantén limpios los alimentos y sigue las recomendaciones
+                    sanitarias de tu comunidad.
+                </p>
+            </article>
+
+            <article class="preventive-card">
+                <div class="preventive-icon" aria-hidden="true">😴</div>
+                <h2>Descanso y bienestar</h2>
+                <p>
+                    Procura dormir lo suficiente, mantener rutinas de descanso
+                    y dedicar tiempo a actividades que favorezcan tu
+                    bienestar físico y emocional.
+                </p>
+            </article>
+
+        </section>
+
+        <aside class="preventive-notice">
+            <h2>Recuerda</h2>
+            <p>
+                Esta información tiene fines educativos y no reemplaza
+                una consulta médica, un diagnóstico ni un tratamiento
+                indicado por un profesional de la salud.
+            </p>
+        </aside>
+
+        <nav class="preventive-actions" aria-label="Navegación">
+            <a th:href="@{/paciente}" class="btn-preventive">
+                Volver al menú principal
+            </a>
+
+            <a th:href="@{/citas/nueva}" class="btn-preventive">
+                Agendar una cita
+            </a>
+        </nav>
+
+    </main>
+
+</body>
+</html>

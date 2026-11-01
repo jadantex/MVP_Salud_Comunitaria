@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fecha y hora | Salud Comunitaria</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+<main class="appointment-page">
+    <div class="appointment-content">
+
+        <header class="appointment-header">
+            <div>
+                <a th:href="@{/citas/nueva}">← Volver a especialidades</a>
+                <h1>Selecciona fecha y hora</h1>
+                <p>
+                    Profesional:
+                    <strong th:text="${profesional}">Profesional seleccionado</strong>
+                </p>
+                <p>
+                    Especialidad:
+                    <strong th:text="${especialidad}">Medicina general</strong>
+                </p>
+            </div>
+            <strong>Salud Comunitaria</strong>
+        </header>
+
+        <nav class="appointment-steps" aria-label="Pasos para agendar una cita">
+            <div class="appointment-step active">1. Especialidad</div>
+            <div class="appointment-step active">2. Profesional</div>
+            <div class="appointment-step active">3. Fecha y hora</div>
+            <div class="appointment-step">4. Confirmar</div>
+        </nav>
+
+        <form th:action="@{/citas/confirmar}" method="get" id="dateTimeForm">
+
+            <input type="hidden" name="especialidad" th:value="${especialidad}">
+            <input type="hidden" name="profesional" th:value="${profesional}">
+
+            <div class="calendar-layout">
+
+                <section class="calendar-panel">
+                    <h2>Elige el día de tu cita</h2>
+                    <p class="calendar-description">
+                        Selecciona una fecha disponible en el calendario.
+                    </p>
+
+                    <label for="fecha">Fecha de la cita</label>
+                    <input
+                        type="date"
+                        id="fecha"
+                        name="fecha"
+                        required>
+                    <p class="calendar-note">
+                        Los horarios se muestran como opciones de demostración.
+                    </p>
+                </section>
+
+                <section class="schedule-panel">
+                    <h2>Horarios disponibles</h2>
+                    <p class="calendar-description">
+                        Selecciona el horario que más te convenga.
+                    </p>
+
+                    <div class="time-slots">
+                        <label class="time-slot">
+                            <input type="radio" name="hora" value="08:00" required>
+                            <span>8:00 a. m.</span>
+                        </label>
+
+                        <label class="time-slot">
+                            <input type="radio" name="hora" value="08:30">
+                            <span>8:30 a. m.</span>
+                        </label>
+
+                        <label class="time-slot">
+                            <input type="radio" name="hora" value="09:00">
+                            <span>9:00 a. m.</span>
+                        </label>
+
+                        <label class="time-slot">
+                            <input type="radio" name="hora" value="09:30">
+                            <span>9:30 a. m.</span>
+                        </label>
+
+                        <label class="time-slot">
+                            <input type="radio" name="hora" value="10:00">
+                            <span>10:00 a. m.</span>
+                        </label>
+
+                        <label class="time-slot">
+                            <input type="radio" name="hora" value="10:30">
+                            <span>10:30 a. m.</span>
+                        </label>
+
+                        <label class="time-slot">
+                            <input type="radio" name="hora" value="14:00">
+                            <span>2:00 p. m.</span>
+                        </label>
+
+                        <label class="time-slot">
+                            <input type="radio" name="hora" value="14:30">
+                            <span>2:30 p. m.</span>
+                        </label>
+                    </div>
+                </section>
+
+            </div>
+
+            <p id="dateTimeMessage" class="appointment-message"
+               role="alert" hidden>
+                Selecciona una fecha y un horario para continuar.
+            </p>
+
+            <div class="appointment-actions">
+                <button type="submit" class="appointment-button">
+                    Continuar →
+                </button>
+            </div>
+
+        </form>
+    </div>
+</main>
+
+<script>
+    const fechaInput = document.getElementById('fecha');
+    const formulario = document.getElementById('dateTimeForm');
+    const mensaje = document.getElementById('dateTimeMessage');
+
+    // Impide seleccionar fechas anteriores al día actual.
+    const hoy = new Date();
+    const fechaLocal = [
+        hoy.getFullYear(),
+        String(hoy.getMonth() + 1).padStart(2, '0'),
+        String(hoy.getDate()).padStart(2, '0')
+    ].join('-');
+
+    fechaInput.min = fechaLocal;
+
+    formulario.addEventListener('submit', function(event) {
+        const fecha = fechaInput.value;
+        const hora = document.querySelector('input[name="hora"]:checked');
+
+        if (!fecha || !hora || fecha < fechaLocal) {
+            event.preventDefault();
+            mensaje.hidden = false;
+            mensaje.textContent =
+                'Selecciona una fecha válida y un horario para continuar.';
+        } else {
+            mensaje.hidden = true;
+        }
+    });
+</script>
+
+</body>
+</html>
